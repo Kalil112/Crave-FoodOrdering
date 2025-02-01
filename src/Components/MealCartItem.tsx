@@ -27,7 +27,7 @@ export default function MealCartItem({cartItem,dispatchfn}:propsType){
                         <p className="w-40 truncate">{cartItem.strMeal}</p>
                         <p>{cartItem.totalPrice}</p>
                     </div>
-                    <p className="text-left px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    <p className="text-left px-2 h-12 overflow-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                     <div className="m-1 float-right">
                         <button className="mx-1.5" onClick={()=>{quantityHandler("decrement",cartItem)}}><FaMinus/></button>
                             <p className="inline">{cartItem.quantity}</p>

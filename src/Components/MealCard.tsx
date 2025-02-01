@@ -27,11 +27,11 @@ function MealCard({mealItem}:MealCardProps){
     }
     /*252 */
     return(<>
-        <article className="food-card bg-[#FFFFFF] w-44 flex flex-col justify-between rounded-lg overflow-hidden shadow-lg hover: cursor-pointer">
+        <article className="food-card bg-[#FFFFFF] min-w-32 max-w-56 flex flex-col justify-between rounded-lg overflow-hidden shadow-lg hover: cursor-pointer">
             <div className="img-container h-24 w-41 md:w-42 lg:w-46">
                 <img className="w-full h-full" alt="food-img" src={mealItem.strMealThumb}/>    
             </div>
-            <span className="food-name  block text-sm font-bold text-left m-1">{mealItem.strMeal}</span>
+            <span className="food-name block text-sm font-bold text-left text-ellipsis p-1">{mealItem.strMeal}</span>
             <span className="food-desc block text-xs text-left text-balance m-1 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. </span>
             <div className="flex p-1.5 justify-between p-1">
                 <p className="price font-bold">250</p>
