@@ -40,7 +40,7 @@ export default function Footer(){
                 <li className="list-item hover:cursor-pointer">
                         <NavLink to="/cart">
                             <div className="relative">
-                                {cartState.items.length !==0 && <div className="absolute h-2.5 w-2.5 top-0 right-0 bg-green-500 rounded-lg"></div> }
+                                {cartState.items.length !==0 && <div className="absolute h-3 w-3 top-0 right-0 bg-green-500 rounded-lg text-xs flex items-center justify-center">{cartState.items.length}</div> }
                                 
                                 <FaShoppingCart size={"1.5em"} color="#047857"/>
                             </div>

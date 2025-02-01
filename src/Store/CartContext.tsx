@@ -1,4 +1,4 @@
-import { createContext, useReducer, memo, useState,useEffect } from "react"
+import { createContext, useReducer,useRef, memo } from "react"
 import { reducerfn} from "./reducerFn";
 
 export type MealObjType = {
@@ -20,11 +20,12 @@ export type MealCartType = {
 export type contextType = {
     cartState: cartStateType,
     mealArr:MealObjType[],
+    category:React.MutableRefObject<string>
     dispatch: React.Dispatch<reducerActionType>
 }
 
 export type cartStateType={
-    items:MealCartType[]
+    items:MealCartType[],
 }
 
 export type reducerActionType={
@@ -35,6 +36,9 @@ export type reducerActionType={
 export const CartContext = createContext<contextType>({
     cartState:{items:[]},
     mealArr:[],
+    category:{
+        current:""
+    },
     dispatch: () => {}
 })
 
@@ -52,34 +56,14 @@ function CartContextProvider({children}:{children:React.ReactNode}){
     const initialState:cartStateType = {items:[]};
 
     const [cartState,dispatch] =useReducer(reducerfn,initialState)
-    //const [category,setCategory]=useState<String>("Dessert")
-
-    const [mealArr,setMealArr]=useState<MealObjType[]>([])
-
-    useEffect(()=>{
-        let data:any;
-        async function getMealData (){
-            
-            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken`,{})
-            if(!response.ok){
-                throw new Error("Failed to Fetch")
-            }
-            data = await response.json();
-            setMealArr(data.meals);
-        }
-        try{
-            getMealData();
-        }
-        catch(err){
-            console.log(err);
-        }
-        
-    },[])
+    const mealArr:MealObjType[]=[]
+    const category = useRef("Chicken")
 
     
     const contextValue:contextType={
         cartState,
         mealArr,
+        category,
         dispatch
     }
 

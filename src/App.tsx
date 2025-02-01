@@ -11,16 +11,6 @@ import PageLayout from './Pages/PageLayout';
 
 
 function App() {
-  /*const [cartView,setCartView] = useState(false);
-
-  function cartViewHandler(){
-    if(cartView){
-      setCartView(false)
-    }
-    else{
-      setCartView(true);
-    }
-  }*/
   const router = createBrowserRouter([{
     path:"/",
     element:<PageLayout/>,
@@ -32,12 +22,12 @@ function App() {
     }   
 ])
   return (
-    <MemoizedCartContext>
-      <div className="App">
+    <div className="App">   
+    <MemoizedCartContext> 
           <RouterProvider router={router}>
           </RouterProvider>
-      </div>
     </MemoizedCartContext>
+    </div>
    
 )};
 

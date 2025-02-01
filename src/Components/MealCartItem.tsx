@@ -18,11 +18,11 @@ export default function MealCartItem({cartItem,dispatchfn}:propsType){
     }
 
     return(
-        <article className="flex items-stretch rounded-lg m-4 max-h-28 h-full overflow-hidden shadow-md hover:shawdow-lg cursor-pointer " >
+        <article className="flex items-stretch rounded-lg min-w-85 m-4 max-h-28 h-full overflow-hidden shadow-md hover:cursor-pointer" >
                 <div className="img-container h-24.25 w-40 rounded-lg">
                     <img className="w-full h-full" src={cartItem.strMealThumb} alt="cart-item"/>
                 </div>
-                <div>
+                <div className="w-full">
                     <div className="flex justify-between align-center px-2 py-1 font-bold">
                         <p className="w-40 truncate">{cartItem.strMeal}</p>
                         <p>{cartItem.totalPrice}</p>
