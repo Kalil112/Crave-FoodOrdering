@@ -1,14 +1,16 @@
-import { MemoizedMealCard } from "./MealCard";
-import { useState,useEffect,useContext, memo } from "react";
+//import { MemoizedMealCard } from "./MealCard";
+import {useContext, memo, lazy, Suspense } from "react";
 import { CartContext } from "../Store/CartContext";
 import type { MealObjType } from "../Store/CartContext";
+import {useQuery} from "@tanstack/react-query";
+import {fetchData} from "../Store/fetchData";
 
-export const MemoizedMealList  = memo(MealList);
+ const MemoizedMealCard = lazy(()=>import("./MealCard"))
     
- function MealList() {
+ export const MemoizedMealList = memo(function MealList() {
     const {category}= useContext(CartContext);
-    const [mealArr,setMealArr]=useState<MealObjType[]>([]);
-    useEffect(()=>{
+    //const [mealArr,setMealArr]=useState<MealObjType[]>([]);
+    /*useEffect(()=>{
         let data:any;
         async function getMealData (){
             
@@ -26,10 +28,30 @@ export const MemoizedMealList  = memo(MealList);
             console.log(err);
         }
         
-    },[category]);
+    },[category]);*/
+
+    const {data,isLoading,error}= useQuery<MealObjType[]>({
+        queryKey:[`food-${category.current}`],
+        queryFn: ()=>fetchData(category.current)
+    })
+
+    if(isLoading){
+        return <p>Loading...</p>
+    }
+
+    if(error){
+        return <p>Errored Out</p>
+    }
+
+
+
     return (
         <div className="Meal-List my-16 mx-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center">
-            {mealArr.map((item: MealObjType,index:number) => <MemoizedMealCard key={index} mealItem={item}/>)}
+            {data && data?.map((item: MealObjType,index:number) =>
+                <Suspense key={index} fallback={<p></p>}>
+                    <MemoizedMealCard key={index} mealItem={item}/>
+                </Suspense>
+             )}
         </div>
     );
-}
+});

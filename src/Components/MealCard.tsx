@@ -8,9 +8,9 @@ type MealCardProps = {
     mealItem:MealObjType
 }
 
-export const MemoizedMealCard = memo(
+//export const MemoizedMealCard = memo(
 
-function MealCard({mealItem}:MealCardProps){ 
+export default function MealCard({mealItem}:MealCardProps){ 
     const cart = useContext(CartContext)
 
     const addMealItem = (mealItem:MealObjType) : void=>{
@@ -29,7 +29,7 @@ function MealCard({mealItem}:MealCardProps){
     return(<>
         <article className="food-card bg-[#FFFFFF] min-w-32 max-w-56 flex flex-col justify-between rounded-lg overflow-hidden shadow-lg hover: cursor-pointer">
             <div className="img-container h-24 w-41 md:w-42 lg:w-46">
-                <img className="w-full h-full" alt="food-img" src={mealItem.strMealThumb}/>    
+                <img className="w-full h-full" alt={mealItem.strMeal} src={mealItem.strMealThumb} loading="lazy"/>    
             </div>
             <span className="food-name block text-sm font-bold text-left text-ellipsis p-1">{mealItem.strMeal}</span>
             <span className="food-desc block text-xs text-left text-balance m-1 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. </span>
@@ -43,4 +43,4 @@ function MealCard({mealItem}:MealCardProps){
         </article>
     </>
     )
-});
+};
